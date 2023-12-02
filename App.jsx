@@ -401,10 +401,40 @@ export default function App() {
 		   direction using the direction pad on the screen or the arrow keys on your keyboard, while staying within the boundaries of the prison. You should also be able to escape the prison if you blow up the door using the A and B buttons! 
 */
 
-	function updatePosition() {
-						
-	}
+function updatePosition() {
+	const direction = pookachu.direction;
 
+	setPookachu((prevPosition) => {
+		let newPosition = { ...prevPosition };
+
+		switch (direction) {
+			case "right":
+				if (newPosition.xPosition < boundaries.xAxis.max) {
+					newPosition.xPosition += 1;
+				}
+				break;
+			case "left":
+				if (newPosition.xPosition > boundaries.xAxis.min) {
+					newPosition.xPosition -= 1;
+				}
+				break;
+			case "down":
+				if (newPosition.yPosition < boundaries.yAxis.max) {
+					newPosition.yPosition += 1;
+				}
+				break;
+			case "up":
+				if (newPosition.yPosition > boundaries.yAxis.min) {
+					newPosition.yPosition -= 1;
+				}
+				break;
+		}
+
+		return newPosition;
+	});
+}
+
+	console.log(pookachu)
 	return (
 		<div
 			className="wrapper"
